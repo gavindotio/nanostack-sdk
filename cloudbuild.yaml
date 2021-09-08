@@ -48,6 +48,7 @@ steps:
         ls -al -R
 
   - name: "node"
+    dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["ci"]
 
@@ -63,6 +64,7 @@ steps:
         git config --global user.name "Gavin Minami"
 
   - name: "node"
+    dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["run", "release"]
 
@@ -77,6 +79,7 @@ steps:
         git push --follow-tags origin main
 
   - name: "node"
+    dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["publish"]
     env:
