@@ -37,6 +37,16 @@ steps:
       - name: "home"
         path: /root/
 
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-eEuo"
+      - "pipefail"
+      - "-c"
+      - |-
+        pwd
+        ls -al -R
+
   - name: "node"
     entrypoint: "npm"
     args: ["ci"]
@@ -48,6 +58,7 @@ steps:
       - "pipefail"
       - "-c"
       - |-
+        pwd
         git config --global user.email "gavin@gavinminami.com"
         git config --global user.name "Gavin Minami"
 
