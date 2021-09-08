@@ -69,6 +69,7 @@ steps:
     args: ["run", "release"]
 
   - name: "gcr.io/cloud-builders/gcloud"
+    dir: "/workspace/nanostack-sdk"
     entrypoint: "bash"
     args:
       - "-eEuo"
