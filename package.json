@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "prepare": "tsc --project ./",
+    "release": "standard-version",
     "test": "ts-node test"
   },
   "repository": {

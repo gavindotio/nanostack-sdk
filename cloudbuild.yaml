@@ -16,6 +16,10 @@ steps:
     entrypoint: "npm"
     args: ["install"]
 
+  - name: "node"
+    entrypoint: "npm"
+    args: ["run", "release"]
+
   - name: "gcr.io/cloud-builders/npm"
     args: ["publish"]
     env:
