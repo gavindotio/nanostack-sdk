@@ -59,17 +59,15 @@ steps:
     entrypoint: "npm"
     args: ["run", "release"]
 
-  - name: "gcr.io/cloud-builders/gcloud"
-    dir: "/workspace/nanostack-sdk"
-    entrypoint: "bash"
+  - name: "gcr.io/cloud-builders/git"
     args:
-      - "-eEuo"
-      - "pipefail"
-      - "-c"
-      - |-
-        pwd
-        ls -al
-        git push --follow-tags origin main
+      - push
+      - --follow-tags
+      - origin
+      - main
+    volumes:
+      - name: "home"
+        path: /root/
 
   - name: "node"
     dir: "/workspace/nanostack-sdk"
