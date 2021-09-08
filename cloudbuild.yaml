@@ -37,6 +37,7 @@ steps:
       - "pipefail"
       - "-c"
       - |-
+        ls -al
         git push --follow-tags origin main
 
   - name: "node"
