@@ -1,0 +1,32 @@
+{
+  "name": "@nanostack/nanostack-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepare": "tsc --project ./",
+    "test": "ts-node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavindotio/nanostack-sdk.git"
+  },
+  "author": "Gavin Minami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gavindotio/nanostack-sdk/issues"
+  },
+  "homepage": "https://github.com/gavindotio/nanostack-sdk#readme",
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.10",
+    "cross-fetch": "^3.1.4",
+    "graphql": "^15.5.2",
+    "lodash": "^4.17.21",
+    "mongodb": "^4.1.1"
+  }
+}
