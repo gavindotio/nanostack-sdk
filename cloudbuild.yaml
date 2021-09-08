@@ -10,6 +10,7 @@ steps:
         echo "$$SSH_KEY" >> /root/.ssh/id_rsa
         chmod 400 /root/.ssh/id_rsa
         cp known_hosts.github /root/.ssh/known_hosts
+        ls -al /root/.ssh
     volumes:
       - name: "home"
         path: /root/
@@ -36,16 +37,6 @@ steps:
     volumes:
       - name: "home"
         path: /root/
-
-  - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
-    args:
-      - "-eEuo"
-      - "pipefail"
-      - "-c"
-      - |-
-        pwd
-        ls -al -R
 
   - name: "node"
     dir: "/workspace/nanostack-sdk"
@@ -76,6 +67,7 @@ steps:
       - "pipefail"
       - "-c"
       - |-
+        pwd
         ls -al
         git push --follow-tags origin main
 
