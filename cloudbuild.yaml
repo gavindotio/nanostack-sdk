@@ -60,6 +60,7 @@ steps:
     args: ["run", "release"]
 
   - name: "gcr.io/cloud-builders/git"
+    dir: "/workspace/nanostack-sdk"
     args:
       - push
       - --follow-tags
