@@ -16,11 +16,22 @@ steps:
     entrypoint: "npm"
     args: ["install"]
 
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-eEuo"
+      - "pipefail"
+      - "-c"
+      - |-
+        git config --global user.email "gavin@gavinminami.com"
+        git config --global user.name "Gavin Minami"
+
   - name: "node"
     entrypoint: "npm"
     args: ["run", "release"]
 
-  - name: "gcr.io/cloud-builders/npm"
+  - name: "node"
+    entrypoint: "npm"
     args: ["publish"]
     env:
       - HOME=/root/
