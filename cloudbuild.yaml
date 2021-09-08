@@ -14,7 +14,7 @@ steps:
 
   - name: "node"
     entrypoint: "npm"
-    args: ["install"]
+    args: ["ci"]
 
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
@@ -37,9 +37,7 @@ steps:
       - "pipefail"
       - "-c"
       - |-
-        git add .
-        git commit -m "[skip ci] release"
-        git push origin main
+        git push --follow-tags origin main
 
   - name: "node"
     entrypoint: "npm"
