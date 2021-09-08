@@ -30,6 +30,17 @@ steps:
     entrypoint: "npm"
     args: ["run", "release"]
 
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-eEuo"
+      - "pipefail"
+      - "-c"
+      - |-
+        git add .
+        git commit -m "[skip ci] release"
+        git push origin main
+
   - name: "node"
     entrypoint: "npm"
     args: ["publish"]
