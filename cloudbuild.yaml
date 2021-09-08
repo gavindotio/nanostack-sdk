@@ -1,11 +1,14 @@
 steps:
-  - name: "gcr.io/cloud-builders/git"
+  - id: Configure git
+    name: "gcr.io/cloud-builders/git"
     secretEnv: ["SSH_KEY"]
     entrypoint: "bash"
     args:
       - -c
       - |
         git config --global init.defaultBranch main
+        git config --global user.email "gavin@gavinminami.com"
+        git config --global user.name "Gavin Minami"
         mkdir /root/.ssh
         echo "$$SSH_KEY" >> /root/.ssh/id_rsa
         chmod 400 /root/.ssh/id_rsa
@@ -15,8 +18,8 @@ steps:
       - name: "home"
         path: /root/
 
-  # Clone the repository
-  - name: "gcr.io/cloud-builders/git"
+  - id: Git clone
+    name: "gcr.io/cloud-builders/git"
     args:
       - clone
       - --recurse-submodules
@@ -25,7 +28,8 @@ steps:
       - name: "home"
         path: /root/
 
-  - name: "gcr.io/cloud-builders/gcloud"
+  - id: Decrypt .npmrc
+    name: "gcr.io/cloud-builders/gcloud"
     args:
       - kms
       - decrypt
@@ -38,28 +42,20 @@ steps:
       - name: "home"
         path: /root/
 
-  - name: "node"
+  - id: Install dependencies
+    name: "node"
     dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["ci"]
 
-  - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
-    args:
-      - "-eEuo"
-      - "pipefail"
-      - "-c"
-      - |-
-        pwd
-        git config --global user.email "gavin@gavinminami.com"
-        git config --global user.name "Gavin Minami"
-
-  - name: "node"
+  - id: Increment version and tag release
+    name: "node"
     dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["run", "release"]
 
-  - name: "gcr.io/cloud-builders/git"
+  - id: Push tag to git
+    name: "gcr.io/cloud-builders/git"
     dir: "/workspace/nanostack-sdk"
     args:
       - push
@@ -70,7 +66,8 @@ steps:
       - name: "home"
         path: /root/
 
-  - name: "node"
+  - id: Publish NPM module
+    name: "node"
     dir: "/workspace/nanostack-sdk"
     entrypoint: "npm"
     args: ["publish"]
