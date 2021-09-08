@@ -1,1 +1,4 @@
 src/
+cloudbuild.yaml
+known_hosts.github
+npmrc.enc
